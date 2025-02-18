@@ -49,6 +49,12 @@ cd synthesis
 ts-node src/examples/llm-paper-summary/index.ts
 ```
 
+5. You can serve the synthesize() method as an Express server:
+```bash
+cd synthesis
+ts-node src/server.ts
+```
+
 ## What's Included?  
 - **AI-powered synthesis utilities** – Out-of-the-box utilities for converting diverse input sources (PDFs, text, and more coming soon) into structured, consumable audio formats like roundtable discussions, formal debates, and expert interviews. This codebase is meant to be used as a starting point for your own customizable pipelines.
 - **Serverless backend (Cloud Run)** – Built to deploy on Cloud Run, so you can easily spin up a Serverless API that your frontends can consume.
@@ -56,16 +62,11 @@ ts-node src/examples/llm-paper-summary/index.ts
 
 Get started quickly, customize as needed, and bring AI-powered research synthesis to your own applications.  
 
-## Key Features  
-- **AI-Powered Audio Generation** – Pre-built pipelines that use LLMs to turn your raw notes and sources into consumable audio content (podcasts - interviews, debates, roundtables)
-- **Firebase & Serverless-Friendly** – Deploy easily on Firebase/Cloud Run or run locally  
-- **Extensible & Customizable** – Use this as a starting point and customize the pipeline to your own needs - this is a boilerplate / sample meant to be iterated on
-
 ## Who is This For?  
 
 This starter kit is designed for developers, startups, and researchers looking to integrate AI-powered content synthesis into their applications without building everything from scratch.  
 
-## Detailed Usage
+## Usage
 You can easily generate AI-powered podcasts from any text content by configuring the synthesis options. The system is flexible and can handle various podcast formats including:
 
 1. One-on-one interviews
