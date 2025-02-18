@@ -26,7 +26,7 @@ Here's how can you can quickly get started and see your first podcast uploaded t
    - Download the key in JSON format, and rename it "credentials.json". Put this JSON file in the `synthesis/` directory.
 
 
-2. Create a .env file:
+2. **Create a .env file**
 ```bash
 vim synthesis/.env
 ```
@@ -39,13 +39,13 @@ vim synthesis/.env
 GOOGLE_API_KEY=xxxxx
 ```
 
-5. Run the test command:
+5. **Run the test command**:
 ```bash
 cd synthesis
 ts-node src/examples/llm-paper-summary/index.ts
 ```
 
-6. You can serve the synthesize() method as an Express server:
+6. **You can serve the synthesize() method as an Express server**:
 ```bash
 cd synthesis
 ts-node src/server.ts
