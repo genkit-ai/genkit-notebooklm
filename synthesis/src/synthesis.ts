@@ -5,7 +5,6 @@ import { SynthesisRequest, SynthesisResult, PodcastOptions, PodcastResult } from
 
 
 export async function synthesize(request: SynthesisRequest): Promise<SynthesisResult> {
-  console.log("REQ", JSON.stringify(request, null, 2));
   const results: SynthesisResult = {};
   
   for (const output of request.output) {
