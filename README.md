@@ -197,7 +197,7 @@ export const ethicalDebateConfig = {
 ```
 > **Note**: For detailed configuration schemas and options for each podcast format, see the TypeScript interfaces in `src/schemas/*.ts`
 
-## Optional Hosting on Firebase
+## Optional Firebase Integrations 
 `synthesis/src/config.ts` has `USE_FIRESTORE` and `USE_STORAGE` configurations. 
 
 `USE_FIRESTORE`: 
