@@ -39,13 +39,13 @@ vim synthesis/.env
 GOOGLE_API_KEY=xxxxx
 ```
 
-5. **Run the test command**:
+5. **Run the test command**
 ```bash
 cd synthesis
 ts-node src/examples/llm-paper-summary/index.ts
 ```
 
-6. **You can serve the synthesize() method as an Express server**:
+6. **You can serve the synthesize() method as an Express server**
 ```bash
 cd synthesis
 ts-node src/server.ts
