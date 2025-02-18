@@ -4,13 +4,6 @@ Build your own NotebookLM-style application using this sample as a starting poin
 
 Here's an [example](https://github.com/genkit-ai/genkit-notebooklm/raw/refs/heads/main/synthesis_podcast_audio_expert-interview.mp3) - interview generated from an LLM research paper on L1 regularization.
 
-
-## Prerequisites
-Before getting started, you'll need:
-
-
-
-
 ## Quickstart
 Here's how can you can quickly get started and see your first podcast uploaded to Cloud Storage:
 
