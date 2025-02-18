@@ -53,7 +53,7 @@ Get started quickly, customize as needed, and bring AI-powered research synthesi
 
 ## Who is This For?  
 
-This starter kit is designed for developers, startups, and researchers looking to integrate AI-powered content synthesis into their applications without building everything from scratch.  
+This sample is designed to be a starting point for developers, startups, and researchers looking to integrate AI-powered content synthesis into their applications without building everything from scratch.
 
 ## Usage
 You can easily generate AI-powered podcasts from any text content by configuring the synthesis options. The system is flexible and can handle various podcast formats including:
