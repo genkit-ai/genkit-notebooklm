@@ -15,18 +15,11 @@ Before getting started, you'll need:
    - Search for "Cloud Text-to-Speech API"
    - Click "Enable"
 
-2. **Get a Makersuite API Key**
+2. **Get a Gemini API Key**
    - Visit [Google AI Studio](https://makersuite.google.com)
    - Click "Get API Key" in the top right
    - Create a new API key or use an existing one
    - Copy the API key - you'll need this for the `.env` file
-3. **Firebase Project (OPTIONAL)**
-   - Comes batteries included - easily store generated podcast metadata in Firestore and Cloud Storage (however, is fully optional)
-   - A Firebase project with Blaze (pay-as-you-go) plan enabled
-   - Firebase CLI installed (`npm install -g firebase-tools`)
-   - Logged in to Firebase (`firebase login`)
-   - Enable Firestore Database in your Firebase Console
-   - Enable Cloud Storage in your Firebase Console
 
 ## Quickstart
 Here's how can you can quickly get started and see your first podcast uploaded to Cloud Storage:
@@ -36,20 +29,19 @@ Here's how can you can quickly get started and see your first podcast uploaded t
 vim synthesis/.env
 ```
 
-2. Grab your API Key from makersuite.google.com, and paste it in the .env:
 ```bash
 GOOGLE_API_KEY=xxxxx
 ```
 
-3. Go to Firebase Console, navigate to Project Settings > Service Accounts, click "Generate New Private Key" to download your admin SDK credentials as a JSON file. Save this file as `credentials.json` in your `synthesis/` directory.
+2. Go to Firebase Console, navigate to Project Settings > Service Accounts, click "Generate New Private Key" to download your admin SDK credentials as a JSON file. Save this file as `credentials.json` in your `synthesis/` directory.
 
-4. Run the test command:
+3. Run the test command:
 ```bash
 cd synthesis
 ts-node src/examples/llm-paper-summary/index.ts
 ```
 
-5. You can serve the synthesize() method as an Express server:
+4. You can serve the synthesize() method as an Express server:
 ```bash
 cd synthesis
 ts-node src/server.ts
@@ -207,3 +199,11 @@ export const ethicalDebateConfig = {
 }; 
 ```
 > **Note**: For detailed configuration schemas and options for each podcast format, see the TypeScript interfaces in `src/schemas/*.ts`
+
+## OPTIONAL HOSTING ON FIREBASE
+   - Comes batteries included - easily store generated podcast metadata in Firestore and Cloud Storage (however, is fully optional)
+   - A Firebase project with Blaze (pay-as-you-go) plan enabled
+   - Firebase CLI installed (`npm install -g firebase-tools`)
+   - Logged in to Firebase (`firebase login`)
+   - Enable Firestore Database in your Firebase Console
+   - Enable Cloud Storage in your Firebase Console
