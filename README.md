@@ -77,8 +77,11 @@ You can easily generate AI-powered podcasts from any text content by configuring
 To generate a podcast:
 
 1. Create a podcast configuration object defining your desired format and speakers (see examples below)
-2. Prepare your input text (can be a PDF, string, or array of strings)
-3. Call the synthesis function:
+2. Prepare your input sources. Each source can be either: gs:// URL (pdf only) OR the raw source text as a string).
+3. Define your podcast configuration - this library gives you control over the final generated content format.
+4. Call the synthesis method.
+
+## Example podcast configurations
 
 ```
 // Roundtable podcast
