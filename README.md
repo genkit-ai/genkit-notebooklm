@@ -197,10 +197,13 @@ export const ethicalDebateConfig = {
 ```
 > **Note**: For detailed configuration schemas and options for each podcast format, see the TypeScript interfaces in `src/schemas/*.ts`
 
-## OPTIONAL HOSTING ON FIREBASE
-   - Comes batteries included - easily store generated podcast metadata in Firestore and Cloud Storage (however, is fully optional)
-   - A Firebase project with Blaze (pay-as-you-go) plan enabled
-   - Firebase CLI installed (`npm install -g firebase-tools`)
-   - Logged in to Firebase (`firebase login`)
-   - Enable Firestore Database in your Firebase Console
-   - Enable Cloud Storage in your Firebase Console
+## Optional Hosting on Firebase
+`synthesis/src/config.ts` has `USE_FIRESTORE` and `USE_STORAGE` configurations. 
+
+`USE_FIRESTORE`: 
+- If turned on, the synthesize() method will store job metadata inside Firestore. Information such as generated transcript, discussion hooks, etc. are included as metadata.
+- The current podcast generation step is reported in the job metadata and updated while podcast generation is in progress. This helps you support frontends that show interactive status updates.
+
+`USE_STORAGE`: 
+- If turned on, the synthesize() method will upload the generated podcast to Cloud Storage. The specific location can be defined via the podcast options.
+- If turned on, the server can also accept gs:// URLs as sources. If the files at those source bucket locations are either .pdf or .txt format, they will be included in the generated podcast.
