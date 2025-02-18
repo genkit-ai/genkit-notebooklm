@@ -197,13 +197,22 @@ export const ethicalDebateConfig = {
 ```
 > **Note**: For detailed configuration schemas and options for each podcast format, see the TypeScript interfaces in `src/schemas/*.ts`
 
-## Optional Firebase Integrations 
+## OPTIONAL: Demo Web App & Firebase Integrations 
+We bundled a demo web app that you can use to make your own, custom version of NotebookLM! To use it, you'll need to set up the following:
+
+### Firebase Configurations
 `synthesis/src/config.ts` has `USE_FIRESTORE` and `USE_STORAGE` configurations. 
 
-`USE_FIRESTORE`: 
+1. `USE_FIRESTORE`: 
 - If turned on, the synthesize() method will store job metadata inside Firestore. Information such as generated transcript, discussion hooks, etc. are included as metadata.
 - The current podcast generation step is reported in the job metadata and updated while podcast generation is in progress. This helps you support frontends that show interactive status updates.
 
-`USE_STORAGE`: 
+2. `USE_STORAGE`: 
 - If turned on, the synthesize() method will upload the generated podcast to Cloud Storage. The specific location can be defined via the podcast options.
 - If turned on, the server can also accept gs:// URLs as sources. If the files at those source bucket locations are either .pdf or .txt format, they will be included in the generated podcast.
+
+### Web App
+You can cd into `webapp/` folder. The easiest way to test it out is to run your Express server locally, and point the web app to the local URL. To do that you can follow these steps:
+
+1. Update `webapp/config.ts` to include the correct `firebaseConfig` values from the Firebase Console.
+2. Create a `webapp/.env` file and include BACKEND_HOST=localhost:3000 (or whatever port you've configured your Express server to run on).
