@@ -2,7 +2,7 @@
 
 Build your own NotebookLM-style application using this sample as a starting point. Powered by [Genkit](https://genkit.dev).
 
-Here's an [example](https://github.com/jeffdh5/genkit-notebook-synthesizer/raw/refs/heads/main/synthesis_podcast_audio_expert-interview.mp3) - interview generated from an LLM research paper on L1 regularization.
+Here's an [example](https://github.com/genkit-ai/genkit-notebooklm/raw/refs/heads/main/synthesis_podcast_audio_expert-interview.mp3) - interview generated from an LLM research paper on L1 regularization.
 
 
 ## Prerequisites
