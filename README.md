@@ -8,37 +8,44 @@ Here's an [example](https://github.com/genkit-ai/genkit-notebooklm/raw/refs/head
 ## Prerequisites
 Before getting started, you'll need:
 
+
+
+
+## Quickstart
+Here's how can you can quickly get started and see your first podcast uploaded to Cloud Storage:
+
 1. **Enable Cloud Text-to-Speech API**
    - Go to [Google Cloud Console](https://console.cloud.google.com)
    - Select your project
    - Navigate to "APIs & Services" > "Library" 
    - Search for "Cloud Text-to-Speech API"
-   - Click "Enable"
+   - Click "Enable". It should take you to the details page for this API.
+   - Navigate to "Credentials" and click on "+ Create Credentials" > "Service Account".
+   - Use "genkit-notebooklm" for the service account name, no roles, and click "Create & Continue". It should take you back to the API Details page.
+   - Navigate to "Service Accounts" section of the page, click on the service account you just created, and click "Keys" > "Add Key" > "Create New Key".
+   - Download the key in JSON format, and rename it "credentials.json". Put this JSON file in the `synthesis/` directory.
 
-2. **Get a Gemini API Key**
-   - Visit [Google AI Studio](https://aistudio.google.com/app/apikey)
 
-## Quickstart
-Here's how can you can quickly get started and see your first podcast uploaded to Cloud Storage:
-
-1. Create a .env file:
+2. Create a .env file:
 ```bash
 vim synthesis/.env
 ```
 
+3. **Get a Gemini API Key**
+   - Create a new API Key or copy an existing one from [Google AI Studio](https://aistudio.google.com/app/apikey).
+   - Paste it into the above .env file:
+     
 ```bash
 GOOGLE_API_KEY=xxxxx
 ```
 
-2. Go to Firebase Console, navigate to Project Settings > Service Accounts, click "Generate New Private Key" to download your admin SDK credentials as a JSON file. Save this file as `credentials.json` in your `synthesis/` directory.
-
-3. Run the test command:
+5. Run the test command:
 ```bash
 cd synthesis
 ts-node src/examples/llm-paper-summary/index.ts
 ```
 
-4. You can serve the synthesize() method as an Express server:
+6. You can serve the synthesize() method as an Express server:
 ```bash
 cd synthesis
 ts-node src/server.ts
