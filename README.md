@@ -16,8 +16,7 @@ Before getting started, you'll need:
    - Click "Enable"
 
 2. **Get a Gemini API Key**
-   - Visit [Google AI Studio](https://makersuite.google.com)
-   - Click "Get API Key" in the top right
+   - Visit [Google AI Studio](https://aistudio.google.com/app/apikey)
 
 ## Quickstart
 Here's how can you can quickly get started and see your first podcast uploaded to Cloud Storage:
