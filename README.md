@@ -1,52 +1,47 @@
 # Open-Source NotebookLM Sample 
 
-Build your own NotebookLM-style application using this sample as a starting point. Powered by [Genkit](https://genkit.dev).
+Build your own NotebookLM-style application using this experimental project as a starting point. Powered by [Genkit](https://genkit.dev).
 
-Here's an [example](https://github.com/jeffdh5/genkit-notebook-synthesizer/raw/refs/heads/main/synthesis_podcast_audio_expert-interview.mp3) - interview generated from an LLM research paper on L1 regularization.
+Here's an [example](https://github.com/genkit-ai/genkit-notebooklm/raw/refs/heads/main/synthesis_podcast_audio_expert-interview.mp3) - interview generated from an LLM research paper on L1 regularization.
 
-
-## Prerequisites
-Before getting started, you'll need:
+## Quickstart
+Here's how can you can quickly get started and see your first podcast uploaded to Cloud Storage:
 
 1. **Enable Cloud Text-to-Speech API**
    - Go to [Google Cloud Console](https://console.cloud.google.com)
    - Select your project
    - Navigate to "APIs & Services" > "Library" 
    - Search for "Cloud Text-to-Speech API"
-   - Click "Enable"
+   - Click "Enable". It should take you to the details page for this API.
+   - Navigate to "Credentials" and click on "+ Create Credentials" > "Service Account".
+   - Use "genkit-notebooklm" for the service account name, no roles, and click "Create & Continue". It should take you back to the API Details page.
+   - Navigate to "Service Accounts" section of the page, click on the service account you just created, and click "Keys" > "Add Key" > "Create New Key".
+   - Download the key in JSON format, and rename it "credentials.json". Put this JSON file in the `synthesis/` directory.
 
-2. **Get a Makersuite API Key**
-   - Visit [Google AI Studio](https://makersuite.google.com)
-   - Click "Get API Key" in the top right
-   - Create a new API key or use an existing one
-   - Copy the API key - you'll need this for the `.env` file
-3. **Firebase Project (OPTIONAL)**
-   - Comes batteries included - easily store generated podcast metadata in Firestore and Cloud Storage (however, is fully optional)
-   - A Firebase project with Blaze (pay-as-you-go) plan enabled
-   - Firebase CLI installed (`npm install -g firebase-tools`)
-   - Logged in to Firebase (`firebase login`)
-   - Enable Firestore Database in your Firebase Console
-   - Enable Cloud Storage in your Firebase Console
 
-## Quickstart
-Here's how can you can quickly get started and see your first podcast uploaded to Cloud Storage:
-
-1. Create a .env file:
+2. **Create a .env file**
 ```bash
 vim synthesis/.env
 ```
 
-2. Grab your API Key from makersuite.google.com, and paste it in the .env:
+3. **Get a Gemini API Key**
+   - Create a new API Key or copy an existing one from [Google AI Studio](https://aistudio.google.com/app/apikey).
+   - Paste it into the above .env file:
+     
 ```bash
 GOOGLE_API_KEY=xxxxx
 ```
 
-3. Go to Firebase Console, navigate to Project Settings > Service Accounts, click "Generate New Private Key" to download your admin SDK credentials as a JSON file. Save this file as `credentials.json` in your `synthesis/` directory.
-
-4. Run the test command:
+5. **Run the test command**
 ```bash
 cd synthesis
 ts-node src/examples/llm-paper-summary/index.ts
+```
+
+6. **You can serve the synthesize() method as an Express server**
+```bash
+cd synthesis
+ts-node src/server.ts
 ```
 
 ## What's Included?  
@@ -56,16 +51,11 @@ ts-node src/examples/llm-paper-summary/index.ts
 
 Get started quickly, customize as needed, and bring AI-powered research synthesis to your own applications.  
 
-## Key Features  
-- **AI-Powered Audio Generation** – Pre-built pipelines that use LLMs to turn your raw notes and sources into consumable audio content (podcasts - interviews, debates, roundtables)
-- **Firebase & Serverless-Friendly** – Deploy easily on Firebase/Cloud Run or run locally  
-- **Extensible & Customizable** – Use this as a starting point and customize the pipeline to your own needs - this is a boilerplate / sample meant to be iterated on
-
 ## Who is This For?  
 
-This starter kit is designed for developers, startups, and researchers looking to integrate AI-powered content synthesis into their applications without building everything from scratch.  
+This sample is designed to be a starting point for developers, startups, and researchers looking to integrate AI-powered content synthesis into their applications without building everything from scratch.
 
-## Detailed Usage
+## Usage
 You can easily generate AI-powered podcasts from any text content by configuring the synthesis options. The system is flexible and can handle various podcast formats including:
 
 1. One-on-one interviews
@@ -76,8 +66,11 @@ You can easily generate AI-powered podcasts from any text content by configuring
 To generate a podcast:
 
 1. Create a podcast configuration object defining your desired format and speakers (see examples below)
-2. Prepare your input text (can be a PDF, string, or array of strings)
-3. Call the synthesis function:
+2. Prepare your input sources. Each source can be either: gs:// URL (pdf only) OR the raw source text as a string).
+3. Define your podcast configuration - this library gives you control over the final generated content format.
+4. Call the synthesis method.
+
+## Example podcast configurations
 
 ```
 // Roundtable podcast
@@ -203,3 +196,23 @@ export const ethicalDebateConfig = {
 }; 
 ```
 > **Note**: For detailed configuration schemas and options for each podcast format, see the TypeScript interfaces in `src/schemas/*.ts`
+
+## OPTIONAL: Demo Web App & Firebase Integrations 
+We bundled a demo web app that you can use to make your own, custom version of NotebookLM! To use it, you'll need to set up the following:
+
+### Firebase Configurations
+`synthesis/src/config.ts` has `USE_FIRESTORE` and `USE_STORAGE` configurations. 
+
+1. `USE_FIRESTORE`: 
+- If turned on, the synthesize() method will store job metadata inside Firestore. Information such as generated transcript, discussion hooks, etc. are included as metadata.
+- The current podcast generation step is reported in the job metadata and updated while podcast generation is in progress. This helps you support frontends that show interactive status updates.
+
+2. `USE_STORAGE`: 
+- If turned on, the synthesize() method will upload the generated podcast to Cloud Storage. The specific location can be defined via the podcast options.
+- If turned on, the server can also accept gs:// URLs as sources. If the files at those source bucket locations are either .pdf or .txt format, they will be included in the generated podcast.
+
+### Web App
+You can cd into `webapp/` folder. The easiest way to test it out is to run your Express server locally, and point the web app to the local URL. To do that you can follow these steps:
+
+1. Update `webapp/config.ts` to include the correct `firebaseConfig` values from the Firebase Console.
+2. Create a `webapp/.env` file and include BACKEND_HOST=localhost:3000 (or whatever port you've configured your Express server to run on).
