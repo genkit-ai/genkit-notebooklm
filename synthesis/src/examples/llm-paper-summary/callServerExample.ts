@@ -38,7 +38,7 @@ async function main() {
     intervieweeName: "Dr. Mahsa Taheri",
     topic: "L1 Regularization Breakthroughs",
     maxQuestions: 24,
-    bucketName: "smarthome-d6e27.firebasestorage.app",
+    bucketName: "xxxx.firebasestorage.app",
     transcriptStorage: "transcripts",
     audioStorage: "audio"
   }; 

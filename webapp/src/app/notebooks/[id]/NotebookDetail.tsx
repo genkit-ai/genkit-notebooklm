@@ -151,8 +151,6 @@ export function NotebookDetailClient({ id }: NotebookDetailClientProps) {
         const url = await getDownloadURL(audioRef);
         setAudioUrl(url);
       }
-      //const storage = getStorage();
-      //getDownloadURL(ref(storage,"gs://smarthome-d6e27.firebasestorage.app/undefined/podcast_audio_f17524cb-e1ab-43eb-821c-604e54fe0b4f.mp3"));
     } catch (error) {
       console.error("Failed to generate podcast:", error);
     } finally {
