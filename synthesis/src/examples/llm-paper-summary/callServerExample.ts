@@ -1,8 +1,7 @@
 import fs from 'fs';
 import pdf from 'pdf-parse';
 import path from 'path';
-import { synthesize } from '../../synthesis';
-import { InterviewPodcastOptions, SynthesisRequest } from '../../schemas/podcast';
+import axios from 'axios';
 
 const dataBuffer = fs.readFileSync(path.join(__dirname, 'regularization.pdf'));
 
@@ -16,16 +15,19 @@ async function loadInput() {
   return sourceText;
 }
 
+const url = "localhost:3000/api/synthesis";
+//const url = "https://<CLOUD_RUN_URL>/api/synthesis";
+
 async function main() {
   const inputText = await loadInput();
-  const expertInterviewConfig: InterviewPodcastOptions = {
+  const expertInterviewConfig = {
     format: "interview",
     title: "expert-interview",
     speakers: [
       { 
-        name: "Dr. James Wilson", 
+        name: "Dr. Mahsa Taheri", 
         voiceId: "en-US-Journey-D",
-        background: "AI Research Lead at Stanford" 
+        background: "AI Researcher at University of Hamburg" 
       },
       { 
         name: "Sarah Chen", 
@@ -33,21 +35,30 @@ async function main() {
         background: "Senior Tech Journalist at TechReview" 
       }
     ],
-    intervieweeName: "Dr. James Wilson",
-    topic: "Latest Breakthroughs in AI Research",
-    maxQuestions: 8,
+    intervieweeName: "Dr. Mahsa Taheri",
+    topic: "L1 Regularization Breakthroughs",
+    maxQuestions: 24,
     bucketName: "smarthome-d6e27.firebasestorage.app",
     transcriptStorage: "transcripts",
     audioStorage: "audio"
   }; 
-  const req: SynthesisRequest = {
+  const req = {
+    jobId: 'llm-paper-summary',
     input: inputText,
     output: [{type: "podcast", options: expertInterviewConfig}]
+  };
+
+  try {
+    const response = await axios.post(url, req, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    console.log(response.data);
+  } catch (error) {
+    console.error('Error:', error);
   }
-  const result = await synthesize(req);
-  console.log(result);
 }
 
 main();
-
-

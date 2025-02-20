@@ -57,7 +57,7 @@ export const interviewPodcastScriptFlow = ai.defineFlow(
         'The first listed host should be the primary interviewer.'}
 
       ${options.maxQuestions ?
-        `Include up to ${options.maxQuestions} main questions.` :
+        `Include approximately ${options.maxQuestions} main questions.` :
         'Include approximately 10 main questions in the interview.'}
 
       These scripts should be based on the following input sources (summarized below):

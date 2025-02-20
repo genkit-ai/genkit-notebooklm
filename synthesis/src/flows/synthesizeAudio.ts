@@ -64,9 +64,13 @@ export const synthesizeAudioFlow = ai.defineFlow(
     const outputFileName = `podcast_audio_${options.title || uuidv4()}.mp3`;
     const storagePath = `${options.audioStorage}/${outputFileName}`;
     const bucketName = options.bucketName;
-    const bucket = storage?.bucket(bucketName);
-    const storageUrl = await synthesizePodcastAudio(script, bucket, bucketName, outputFileName, storagePath, speakers, moderator);
-    
+    let storageUrl = "";
+    if (bucketName && USE_CLOUD_STORAGE) {
+      const bucket = storage?.bucket(bucketName);
+      storageUrl = await synthesizePodcastAudio(script, bucket, bucketName, outputFileName, storagePath, speakers, moderator);
+    } else {
+      storageUrl = "";
+    }
     return { audioFileName: outputFileName, storageUrl };
   }
 );
@@ -185,7 +189,7 @@ export async function synthesizePodcastAudio(
     await uploadFileToStorage(bucket, finalOutputFileName, storagePath);
     synthesisMetrics.uploadTime = Date.now() - uploadStart;
     console.log('Generating shareable download URL...');
-    finalOutputPath = `${bucketName}/${storagePath}`;
+    finalOutputPath = `gs://${bucketName}/${storagePath}`;
     console.log('Generated Google Storage URL:', finalOutputPath);
 
     // Clean up local files after upload

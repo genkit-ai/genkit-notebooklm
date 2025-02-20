@@ -40,9 +40,7 @@ export const endToEndPodcastFlow = ai.defineFlow(
   async (input: z.infer<typeof endToEndPodcastInputSchema>) => {
     let timer = Date.now();
     const metrics: Record<string, number> = {};
-
     const logJobStatus = (status: JobStatus, data: any = {}) => {
-      console.log(db, USE_CLOUD_STORAGE, USE_FIRESTORE)
       if (db) {
         const jobRef = db.collection(JOBS_COLLECTION).doc(input.jobId);
         return jobRef.set(data, { merge: true });
@@ -64,7 +62,7 @@ export const endToEndPodcastFlow = ai.defineFlow(
         currentStep: 'Generating summary',
         startTime: Date.now()
       });
-
+      
       const summaryResult = await summarizeSourcesFlow({
         sourceTexts: input.sourceTexts,
       });

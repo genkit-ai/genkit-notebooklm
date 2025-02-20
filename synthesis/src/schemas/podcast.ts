@@ -31,7 +31,6 @@ export type OutputConfig =
  * Main Synthesis Request
  */
 export interface SynthesisRequest {
-    jobId: string;
     /** The input source(s) for synthesis */
     input: string | string[]; // Supports multiple sources (PDFs, URLs, etc.)
     /** The desired output formats */
@@ -46,4 +45,6 @@ export interface SynthesisResult {
 // TODO: Need to figure out how to handle remote storage of the actual files generated
 export interface PodcastResult {
   transcript: string;
+  storageUrl: string;
+  audioFilename: string;
 }
