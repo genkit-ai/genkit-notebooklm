@@ -206,6 +206,7 @@ We bundled a demo web app that you can use to make your own, custom version of N
 1. `USE_FIRESTORE`: 
 - If turned on, the synthesize() method will store job metadata inside Firestore. Information such as generated transcript, discussion hooks, etc. are included as metadata.
 - The current podcast generation step is reported in the job metadata and updated while podcast generation is in progress. This helps you support frontends that show interactive status updates.
+- (Note: The included web app doesn't use a background job architecture, thus it doesn't show the status updates in real time. That requires an additional dependency on Cloud Tasks or other queueing system, and we wanted to keep this sample easily runnable locally.)
 
 2. `USE_STORAGE`: 
 - If turned on, the synthesize() method will upload the generated podcast to Cloud Storage. The specific location can be defined via the podcast options.
